@@ -1,5 +1,5 @@
 const jourJ = new Date("May 14, 2023");
-const why = "La nouvelle coloc !!!";
+const why = "La nouvelle coloc !!! de fou";
 
 const daysSpan = document.querySelector('#days');
 const hoursSpan = document.querySelector('#hours');
