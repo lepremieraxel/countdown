@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <!-- META -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- LINK -->
+    <link rel="stylesheet" href="src/css/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- TITLE -->
+    <title>Axel Marcial's Countdown</title>
+  </head>
+  <body>
+    <header>
+      <h1>MMI Countdown</h1>
+      <button id="connect" onclick="openModal()">
+        <i class="ri-user-3-fill"></i>
+      </button>
+    </header>
+    <main>
+      <div class="date-box">
+        <p>Il reste</p>
+        <h2 id="date">
+          <span id="days" class="input-countdown"></span>&nbsp;<span id="days-name"></span>
+          <span id="hours" class="input-countdown"></span>&nbsp;<span id="hours-name"></span>
+          <span id="minutes" class="input-countdown"></span>&nbsp;<span id="minutes-name"></span>
+          <span id="secondes" class="input-countdown"></span>&nbsp;<span id="secondes-name"></span>
+        </h2>
+        <p>avant</p>
+        <h2 id="why">la nouvelle coloc !!!</h2>
+      </div>
+    </main>
+    <div class="modal-overlay"></div>
+    <div class="modal">
+      <button class="close-modal" onclick="closeModal()">
+        <i class="ri-close-fill"></i>
+      </button>
+      <span class="modal-title">
+        <h3>Hi, Welcome Back!</h3>
+        <p>Please log in to access edit mode.</p>
+      </span>
+      <form name="loginForm">
+        <span class="input-container">
+          <input
+            type="text"
+            name="usernameOrEmail"
+            id="usernameOrEmail"
+            placeholder=" "
+            autocomplete="off"
+            data-isvalid="false"
+          />
+          <label for="usernameOrEmail">Username or email *</label>
+        </span>
+        <span class="input-container">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder=" "
+            autocomplete="off"
+            data-isvalid="false"
+          />
+          <label for="password">Password</label>
+        </span>
+        <button name="submit">Log In</button>
+      </form>
+      <span class="others-actions">
+        <button onclick="forgotForm()">Forgot password</button>
+        <button onclick="signinForm()">Haven't an account</button>
+      </span>
+    </div>
+    <script src="./src/js/sha256-min.js"></script>
+    <script src="./src/js/countdown.js"></script>
+    <script src="./src/js/textContrast.js"></script>
+    <script src="./src/js/form.js"></script>
+    <script src="./src/js/modalManager.js"></script>
+  </body>
+</html>
