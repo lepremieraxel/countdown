@@ -4,50 +4,227 @@ form.addEventListener("submit", (e) => {
   loginSubmit();
 });
 
+const usernameRegex = /^[a-zA-Z0-9_.]+$/;
+const emailRegex = /^[a-z0-9.-_]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+const passwordRegex =
+  /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,20}$/;
 const usersFile = "./src/data/users.json";
 
 function signinSubmit() {
   let username = document.signinForm.username;
+  let usernameError = username.parentElement.children[2];
   let usernameValue = username.value.trim().replaceAll(" ", "_");
-  let usernameIsValid = username.getAttribute('data-isvalid');
+  let usernameIsValid = username.getAttribute("data-isvalid");
+  if (usernameValue.length < 1) {
+    usernameError.textContent = "Please write an username.";
+    usernameError.style.color = "red";
+    username.style.borderColor = "red";
+  }
   console.log(usernameValue);
   console.log(usernameIsValid);
 
   let email = document.signinForm.email;
-  let emailValue = email.value.trim().replaceAll(" ", "_");
-  let emailIsValid = email.getAttribute('data-isvalid');
+  let emailError = email.parentElement.children[2];
+  let emailValue = email.value.trim().replaceAll(" ", "_").toLowerCase();
+  let emailIsValid = email.getAttribute("data-isvalid");
+  if (emailValue.length < 1) {
+    emailError.textContent = "Please write an email.";
+    emailError.style.color = "red";
+    email.style.borderColor = "red";
+  }
   console.log(emailValue);
   console.log(emailIsValid);
 
   let password = document.signinForm.password;
+  let passwordError = password.parentElement.children[2];
   let passwordValue = password.value.trim().replaceAll(" ", "_");
   let passwordHash = hex_sha256(passwordValue);
-  let passwordIsValid = password.getAttribute('data-isvalid');
+  let passwordIsValid = password.getAttribute("data-isvalid");
+  if (passwordValue.length < 1) {
+    passwordError.textContent = "Please write an password.";
+    passwordError.style.color = "red";
+    password.style.borderColor = "red";
+  }
   console.log(passwordValue);
   console.log(passwordHash);
   console.log(passwordIsValid);
 
   let retypePassword = document.signinForm.retypePassword;
+  let retypePasswordError = retypePassword.parentElement.children[2];
   let retypePasswordValue = retypePassword.value.trim().replaceAll(" ", "_");
-  let retypePasswordIsValid = retypePassword.getAttribute('data-isvalid');
+  let retypePasswordIsValid = retypePassword.getAttribute("data-isvalid");
+  if (retypePasswordValue.length < 1) {
+    retypePasswordError.textContent = "Please write again your password.";
+    retypePasswordError.style.color = "red";
+    retypePassword.style.borderColor = "red";
+  }
   console.log(retypePasswordValue);
   console.log(retypePasswordIsValid);
+
+  let usernameTab = [];
+  let emailTab = [];
+
+  let request = new XMLHttpRequest();
+  request.open("GET", usersFile);
+  request.responseType = "json";
+  request.send();
+  request.onload = function () {
+    const data = request.response;
+    if (data != null) {
+      data.forEach((line) => {
+        usernameTab.push(line["username"]);
+        emailTab.push(line["email"]);
+      });
+      if (usernameTab.includes(usernameValue)) {
+        usernameError.textContent = "This username is already used.";
+        usernameError.style.color = "red";
+        username.style.borderColor = "red";
+      }
+      if (emailTab.includes(emailValue)) {
+        emailError.textContent = "This email is already used.";
+        emailError.style.color = "red";
+        email.style.borderColor = "red";
+      }
+
+      if (
+        usernameTab.includes(usernameValue) == false &&
+        emailTab.includes(emailValue) == false &&
+        usernameIsValid == "true" &&
+        emailIsValid == "true" &&
+        passwordIsValid == "true" &&
+        retypePasswordIsValid == "true"
+      ) {
+        window.location.href = `./src/php/writeFile.php?u=${usernameValue}&e=${emailValue}&p=${passwordHash}`;
+        localStorage.setItem("username", usernameValue);
+      }
+    }
+  };
 }
 
 function loginSubmit() {
-  console.log("log");
+  let usernameOrEmail = document.loginForm.usernameOrEmail;
+  let usernameOrEmailSmall = usernameOrEmail.parentElement.children[2];
+  let usernameOrEmailValue = usernameOrEmail.value.trim().replaceAll(" ", "");
+  let password = document.loginForm.password;
+  let passwordSmall = password.parentElement.children[2];
+  let passwordValue = password.value.trim().replaceAll(" ", "");
+  let passwordHash = hex_sha256(passwordValue);
+  let usernameTab = [];
+  let emailTab = [];
+  let passwordTab = [];
+  let request = new XMLHttpRequest();
+  request.open("GET", usersFile);
+  request.responseType = "json";
+  request.send();
+  request.onload = function () {
+    const data = request.response;
+    if (data != null) {
+      let u = 0;
+      let e = 0;
+      data.forEach((line) => {
+        usernameTab.push(line["username"]);
+        emailTab.push(line["email"]);
+        passwordTab.push(line["password"]);
+        u = usernameTab.indexOf(usernameOrEmailValue);
+        e = emailTab.indexOf(usernameOrEmailValue);
+      });
+      if (usernameTab.includes(usernameOrEmailValue)) {
+        usernameOrEmailSmall.textContent = "";
+        usernameOrEmailSmall.style.color = "black";
+        usernameOrEmail.style.borderColor = "green";
+        if (passwordHash == passwordTab[u]) {
+          passwordSmall.textContent = "";
+          passwordSmall.style.color = "black";
+          password.style.borderColor = "green";
+          localStorage.setItem("username", usernameTab[u]);
+          console.log(usernameTab[u]);
+        } else {
+          passwordSmall.textContent = "Wrong password.";
+          passwordSmall.style.color = "red";
+          password.style.borderColor = "red";
+        }
+      } else {
+        usernameOrEmailSmall.textContent = "This username isn't registered.";
+        usernameOrEmailSmall.style.color = "red";
+        usernameOrEmail.style.borderColor = "red";
+        if (emailTab.includes(usernameOrEmailValue)) {
+          usernameOrEmailSmall.textContent = "";
+          usernameOrEmailSmall.style.color = "black";
+          usernameOrEmail.style.borderColor = "green";
+          if (passwordHash == passwordTab[e]) {
+            passwordSmall.textContent = "";
+            passwordSmall.style.color = "black";
+            password.style.borderColor = "green";
+            localStorage.setItem("username", usernameTab[e]);
+            console.log(usernameTab[e]);
+          } else {
+            passwordSmall.textContent = "Wrong password.";
+            passwordSmall.style.color = "red";
+            password.style.borderColor = "red";
+          }
+        } else {
+          usernameOrEmailSmall.textContent = "This email isn't registered.";
+          usernameOrEmailSmall.style.color = "red";
+          usernameOrEmail.style.borderColor = "red";
+        }
+      }
+    }
+  };
 }
 
 function forgotSubmit() {
-  console.log("forgot");
+  let email = document.forgotForm.forgotEmail;
+  let emailSmall = email.parentElement.children[2];
+  let emailValue = email.value.trim().replaceAll(" ", "").toLowerCase();
+  let emailTab = [];
+  let request = new XMLHttpRequest();
+  request.open("GET", usersFile);
+  request.responseType = "json";
+  request.send();
+  request.onload = function () {
+    const data = request.response;
+    if (data != null) {
+      data.forEach((line) => {
+        emailTab.push(line['email']);
+      });
+      if(emailTab.includes(emailValue)){
+        emailSmall.textContent = "";
+        emailSmall.style.color = "black";
+        email.style.borderColor = "green";
+        window.location.href = `./src/php/sendEmail.php?e=${emailValue}`;
+      } else {
+        emailSmall.textContent = "This email isn't registered.";
+        emailSmall.style.color = "red";
+        email.style.borderColor = "red";
+      }
+    }
+  };
+}
+
+function verifForgotInput() {
+  let email = document.forgotForm.forgotEmail;
+  let emailSmall = email.parentElement.children[2];
+  if (email != null) {
+    let emailValue = email.value.trim().replaceAll(" ", "");
+    if (emailValue.length > 0) {
+      if (emailRegex.test(emailValue)) {
+        email.style.borderColor = "green";
+        emailSmall.textContent = " ";
+        emailSmall.style.color = "black";
+      } else {
+        email.style.borderColor = "red";
+        emailSmall.textContent = "Please put a valid email.";
+        emailSmall.style.color = "red";
+      }
+    } else {
+      email.style.borderColor = "black";
+      emailSmall.textContent = " ";
+      emailSmall.style.color = "black";
+    }
+  }
 }
 
 function verifSigninInput() {
-  const usernameRegex = /^[a-zA-Z0-9_.]+$/;
-  const emailRegex = /^[a-zA-Z0-9.-_]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  const passwordRegex =
-    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,20}$/;
-
   // USERNAME
   let usernameInput = document.signinForm.username;
   let usernameSmall = usernameInput.parentElement.children[2];

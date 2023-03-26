@@ -51,16 +51,20 @@ function loginForm(){
   inputUsernameOrEmail.setAttribute("placeholder", " ");
   inputUsernameOrEmail.setAttribute("autocomplete", "off");
   inputUsernameOrEmail.setAttribute("data-isvalid", "false");
-  inputUsernameOrEmail.addEventListener('input', () => {
-    verifInput();
-  });
+  // inputUsernameOrEmail.addEventListener('input', () => {
+  //   verifInput();
+  // });
 
   const labelUsernameOrEmail = document.createElement('label');
   labelUsernameOrEmail.setAttribute("for", "usernameOrEmail");
   labelUsernameOrEmail.textContent = "Username or email *";
 
+  const smallUsernameOrEmail = document.createElement('small');
+  smallUsernameOrEmail.textContent = " ";
+
   spanUsernameOrEmail.appendChild(inputUsernameOrEmail);
   spanUsernameOrEmail.appendChild(labelUsernameOrEmail);
+  spanUsernameOrEmail.appendChild(smallUsernameOrEmail);
 
   const spanPassword = document.createElement('span');
   spanPassword.classList.add('input-container');
@@ -72,16 +76,20 @@ function loginForm(){
   inputPassword.setAttribute("placeholder", " ");
   inputPassword.setAttribute("autocomplete", "off");
   inputPassword.setAttribute("data-isvalid", "false");
-  inputPassword.addEventListener('input', () => {
-    verifInput();
-  });
+  // inputPassword.addEventListener('input', () => {
+  //   verifInput();
+  // });
 
   const labelPassword = document.createElement('label');
   labelPassword.setAttribute("for", "password");
   labelPassword.textContent = "Password *";
 
+  const smallPassword = document.createElement('small');
+  smallPassword.textContent = " ";
+
   spanPassword.appendChild(inputPassword);
   spanPassword.appendChild(labelPassword);
+  spanPassword.appendChild(smallPassword);
 
   const buttonLogin = document.createElement('button');
   buttonLogin.setAttribute('name', 'submit');
@@ -124,12 +132,15 @@ function forgotForm() {
   inputForgotEmail.setAttribute("autocomplete", "off");
   inputForgotEmail.setAttribute("data-isvalid", "false");
   inputForgotEmail.addEventListener('input', () => {
-    verifInput();
+    verifForgotInput();
   });
 
   const labelForgotEmail = document.createElement('label');
   labelForgotEmail.setAttribute("for", "forgotEmail");
   labelForgotEmail.textContent = "Email *";
+
+  const smallForgotEmail = document.createElement('small');
+  smallForgotEmail.textContent = "";
 
   const buttonForgotEmail = document.createElement('button');
   buttonForgotEmail.setAttribute('name', 'submit');
@@ -137,6 +148,7 @@ function forgotForm() {
 
   forgotEmail.appendChild(inputForgotEmail);
   forgotEmail.appendChild(labelForgotEmail);
+  forgotEmail.appendChild(smallForgotEmail);
   modalForm.appendChild(forgotEmail);
   modalForm.appendChild(buttonForgotEmail);
   modal.insertBefore(modalForm, othersActions);

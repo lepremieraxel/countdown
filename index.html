@@ -23,17 +23,11 @@
   </head>
   <body>
     <header>
-      <h1>MMI Countdown</h1>
-      <button id="connect" onclick="openModal()">
+      <h1 class="bg-blur">TIME</h1>
+      <button id="connect" class="bg-blur" onclick="openModal()">
         <i class="ri-user-3-fill"></i>
       </button>
     </header>
-    <div class="fake-header">
-      <h1>MMI Countdown</h1>
-      <button>
-        <i class="ri-user-3-fill"></i>
-      </button>
-    </div>
     <main>
       <div class="date-box">
         <p>Il reste</p>
@@ -67,6 +61,7 @@
             data-isvalid="false"
           />
           <label for="usernameOrEmail">Username or email *</label>
+          <small></small>
         </span>
         <span class="input-container">
           <input
@@ -78,6 +73,7 @@
             data-isvalid="false"
           />
           <label for="password">Password</label>
+          <small></small>
         </span>
         <button name="submit">Log In</button>
       </form>

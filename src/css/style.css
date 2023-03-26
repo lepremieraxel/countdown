@@ -15,9 +15,9 @@ body {
   display: flex;
   flex-flow: column;
   align-items: center;
-  justify-content: center;
+  gap: 20px;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   padding: 10px 20px;
   overflow: hidden;
   background-image: url("../../assets/img/bg.jpg");
@@ -30,28 +30,22 @@ body {
 }
 
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-header, .fake-header{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: calc(100% - 30px);
-  height: fit-content;
-  padding: 30px 50px;
-  margin: 15px;
+  width: calc(100% - 40px);
+  height: 70px;
+  padding: 0 50px;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 0 15px 7px rgba(0, 0, 0, 0.4);
   border-radius: 999px;
 }
-header h1, .fake-header h1 {
+header h1{
   text-transform: uppercase;
   line-height: 0;
 }
-header #connect, .fake-header button {
+header #connect{
   font-size: 2em;
   justify-self: right;
   cursor: pointer;
@@ -61,13 +55,9 @@ header #connect, .fake-header button {
   top: 2px;
 }
 
-.fake-header{
-  opacity: 0;
-  z-index: -1;
-}
-
 main {
   width: 100%;
+  height: calc(100vh - 100px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -241,8 +231,11 @@ main {
   body{
     overflow-y: auto;
   }
-  header, .fake-header{
-    padding: 25px 30px;
+  header{
+    padding: 0 30px;
+  }
+  main{
+    height: 100%;
   }
   .date-box{
     width: fit-content;
