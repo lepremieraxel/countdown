@@ -1,5 +1,7 @@
 <?php
 
+$link= "";
+
 $from = "noreply@axelmarcial.com";
 $to = $_GET['e'];
 $subject = "TIME - Password reset";

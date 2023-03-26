@@ -1,8 +1,10 @@
 let form = document.querySelector("form");
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  loginSubmit();
-});
+if (form != null) {
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    loginSubmit();
+  });
+}
 
 const usernameRegex = /^[a-zA-Z0-9_.]+$/;
 const emailRegex = /^[a-z0-9.-_]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
@@ -20,8 +22,6 @@ function signinSubmit() {
     usernameError.style.color = "red";
     username.style.borderColor = "red";
   }
-  console.log(usernameValue);
-  console.log(usernameIsValid);
 
   let email = document.signinForm.email;
   let emailError = email.parentElement.children[2];
@@ -32,8 +32,6 @@ function signinSubmit() {
     emailError.style.color = "red";
     email.style.borderColor = "red";
   }
-  console.log(emailValue);
-  console.log(emailIsValid);
 
   let password = document.signinForm.password;
   let passwordError = password.parentElement.children[2];
@@ -45,9 +43,6 @@ function signinSubmit() {
     passwordError.style.color = "red";
     password.style.borderColor = "red";
   }
-  console.log(passwordValue);
-  console.log(passwordHash);
-  console.log(passwordIsValid);
 
   let retypePassword = document.signinForm.retypePassword;
   let retypePasswordError = retypePassword.parentElement.children[2];
@@ -58,8 +53,6 @@ function signinSubmit() {
     retypePasswordError.style.color = "red";
     retypePassword.style.borderColor = "red";
   }
-  console.log(retypePasswordValue);
-  console.log(retypePasswordIsValid);
 
   let usernameTab = [];
   let emailTab = [];
@@ -94,8 +87,9 @@ function signinSubmit() {
         passwordIsValid == "true" &&
         retypePasswordIsValid == "true"
       ) {
-        window.location.href = `./src/php/writeFile.php?u=${usernameValue}&e=${emailValue}&p=${passwordHash}`;
         localStorage.setItem("username", usernameValue);
+        window.location.href = `./src/php/writeFile.php?u=${usernameValue}&e=${emailValue}&p=${passwordHash}`;
+        isConnected();
       }
     }
   };
@@ -137,7 +131,6 @@ function loginSubmit() {
           passwordSmall.style.color = "black";
           password.style.borderColor = "green";
           localStorage.setItem("username", usernameTab[u]);
-          console.log(usernameTab[u]);
         } else {
           passwordSmall.textContent = "Wrong password.";
           passwordSmall.style.color = "red";
@@ -156,7 +149,6 @@ function loginSubmit() {
             passwordSmall.style.color = "black";
             password.style.borderColor = "green";
             localStorage.setItem("username", usernameTab[e]);
-            console.log(usernameTab[e]);
           } else {
             passwordSmall.textContent = "Wrong password.";
             passwordSmall.style.color = "red";
@@ -185,9 +177,9 @@ function forgotSubmit() {
     const data = request.response;
     if (data != null) {
       data.forEach((line) => {
-        emailTab.push(line['email']);
+        emailTab.push(line["email"]);
       });
-      if(emailTab.includes(emailValue)){
+      if (emailTab.includes(emailValue)) {
         emailSmall.textContent = "";
         emailSmall.style.color = "black";
         email.style.borderColor = "green";
