@@ -1,6 +1,6 @@
 function isConnected() {
-  console.log(localStorage);
-  const usersFile = './src/data/users.json';
+  // console.log(localStorage);
+  const usersFile = "./src/data/users.json";
   const session = localStorage.getItem("username");
   let usernameTab = [];
   let request = new XMLHttpRequest();
@@ -14,21 +14,30 @@ function isConnected() {
         usernameTab.push(line["username"]);
       });
       if (usernameTab.includes(session)) {
-        console.log(true);
-        let modal = document.querySelector('.modal');
-        modal.parentElement.removeChild(modal);
-        let modalOverlay = document.querySelector('.modal-overlay');
-        modalOverlay.parentElement.removeChild(modalOverlay);
-        let userBtn = document.querySelector('#connect');
-        userBtn.setAttribute('onclick', '');
+        // console.log(true);
+        let usernameHeader = document.querySelector("header span a  ");
+        usernameHeader.innerHTML = "Hello&nbsp;" + session;
+        let modal = document.querySelector(".modal");
+        if(modal != null){
+          modal.parentElement.removeChild(modal);
+        }
+        let modalOverlay = document.querySelector(".modal-overlay");
+        if(modalOverlay != null){
+          modalOverlay.parentElement.removeChild(modalOverlay);
+        }
+        let userBtn = document.querySelector("#connect");
+        userBtn.removeAttribute("onclick");
+        userBtn.addEventListener("click", () => {
+          window.location.href = "./pages/user.html";
+        });
         return true;
       } else {
         return false;
       }
     } else {
-        return false;
+      return false;
     }
   };
 }
 
-document.addEventListener('DOMContentLoaded', isConnected());
+document.addEventListener("click", isConnected());

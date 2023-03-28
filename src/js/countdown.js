@@ -1,5 +1,6 @@
 const jourJ = new Date("May 14, 2023");
-const why = "La nouvelle coloc !!! de fou";
+const why = "La nouvelle coloc !!!";
+const bg = "./assets/img/bg7.jpg";
 
 const daysSpan = document.querySelector('#days');
 const hoursSpan = document.querySelector('#hours');
@@ -14,6 +15,13 @@ const secondesName = document.querySelector('#secondes-name');
 const whySpan = document.querySelector('#why');
 
 function countdown(){
+  // console.log(localStorage);
+  isConnected();
+  
+  whySpan.innerHTML = why;
+  body.style.backgroundImage = 'url('+bg+')';
+  textColor(bg);
+
   const today = new Date();
 
   let remaining = (jourJ - today) / 1000;
@@ -29,30 +37,17 @@ function countdown(){
   let minutes = Math.floor((remaining % (60 * 60)) / 60);
   let secondes = Math.floor(remaining % 60);
 
-  
-  // let hoursN = hours > 1 ? 'heures' : 'heure';
-  // let hours0 = hours > 0 ? hoursN : "";
-  // let hoursV = hours > 0 ? hours : "";
-  
-  // let minutesN = minutes > 1 ? 'minutes' : 'minute';
-  // let minutes0 = minutes > 0 ? minutesN : "";
-  // let minutesV = minutes < 10 ? '0'+minutes : minutes;
-  // minutesV = minutes > 0 ? minutesV : "";
-  
-  // let secondesN = secondes > 1 ? 'secondes' : 'seconde';
-  // let secondesV = secondes < 10 ? '0'+secondes : secondes;
-
   let daysN, daysV;
   let hoursN, hoursV;
   let minutesN, minutesV;
   let secondesN, secondesV;
 
   if(days > 0){
-    daysN = days > 1 ? 'jours' : 'jour';
+    daysN = days > 1 ? 'days' : 'day';
     daysName.innerHTML = daysN;
     daysV = days < 10 ? '0'+days : days;
     daysSpan.innerHTML = daysV;
-    hoursN = hours > 1 ? 'heures' : 'heure';
+    hoursN = hours > 1 ? 'hours' : 'hour';
     hoursName.innerHTML = hoursN;
     hoursV = hours < 10 ? '0'+hours : hours;
     hoursSpan.innerHTML = hoursV;
@@ -113,7 +108,6 @@ function countdown(){
       }
     }
   }
-  whySpan.innerHTML = why;
 }
 
 countdown();

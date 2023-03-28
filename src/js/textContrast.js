@@ -1,8 +1,9 @@
 const body = document.querySelector('body');
+const userBtns = document.querySelectorAll('.top-bar button');
 
-function textColor(){
+function textColor(img){
   const image = new Image();
-  image.src = `../../assets/img/bg5.jpg`;
+  image.src = img;
   
   image.onload = function(){
     const canvas = document.createElement("canvas");
@@ -21,8 +22,14 @@ function textColor(){
     }
     if(sum < (max/2.5)){
       body.style.color = 'white';
+      userBtns.forEach(btn => {
+        btn.style.color = 'white';
+      });
     } else {
       body.style.color = 'black';
+      userBtns.forEach(btn => {
+        btn.style.color = 'black';
+      });
     }
   }
 }

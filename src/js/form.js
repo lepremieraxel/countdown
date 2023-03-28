@@ -87,6 +87,7 @@ function signinSubmit() {
         passwordIsValid == "true" &&
         retypePasswordIsValid == "true"
       ) {
+        
         localStorage.setItem("username", usernameValue);
         window.location.href = `./src/php/writeFile.php?u=${usernameValue}&e=${emailValue}&p=${passwordHash}`;
         isConnected();
@@ -131,6 +132,8 @@ function loginSubmit() {
           passwordSmall.style.color = "black";
           password.style.borderColor = "green";
           localStorage.setItem("username", usernameTab[u]);
+          window.location.href = "/pages/user.html";
+          isConnected();
         } else {
           passwordSmall.textContent = "Wrong password.";
           passwordSmall.style.color = "red";
@@ -149,6 +152,8 @@ function loginSubmit() {
             passwordSmall.style.color = "black";
             password.style.borderColor = "green";
             localStorage.setItem("username", usernameTab[e]);
+            window.location.href = "/pages/user.html";
+            isConnected();
           } else {
             passwordSmall.textContent = "Wrong password.";
             passwordSmall.style.color = "red";

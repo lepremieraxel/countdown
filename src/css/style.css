@@ -18,14 +18,15 @@ body {
   gap: 20px;
   width: 100vw;
   min-height: 100vh;
-  padding: 10px 20px;
+  padding: 10px 50px;
   overflow: hidden;
-  background-image: url("../../assets/img/bg5.jpg");
+  user-select: none;
+  color: black;
+  background-image: url('../../assets/img/bg7.jpg');
   background-position: center !important;
   background-repeat: no-repeat !important;
   background-size: cover !important;
-  user-select: none;
-  color: black;
+  background-attachment: fixed;
   transition: background-image .1s;
 }
 
@@ -33,7 +34,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: calc(100% - 40px);
+  width: 100%;
   height: 70px;
   padding: 0 50px;
   backdrop-filter: blur(20px);
@@ -41,9 +42,24 @@ header {
   box-shadow: 0 0 15px 7px rgba(0, 0, 0, 0.4);
   border-radius: 999px;
 }
+header a{
+  text-decoration: none;
+  color: inherit;
+}
 header h1{
   text-transform: uppercase;
   line-height: 0;
+}
+header span{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+header span a{
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 1.5em;
 }
 header #connect{
   font-size: 2em;
@@ -227,12 +243,91 @@ main {
   transform-origin: left;
 }
 
+#user-section{
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  margin-top: 50px;
+}
+.top-bar{
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  gap: 20px;
+  height: 70px;
+  padding: 0 20px;
+  border-radius: 999px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 0 15px 7px rgba(0, 0, 0, 0.4);
+}
+.top-bar button{
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+.top-bar button::after{
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  border: 4px solid;
+  position: absolute;
+  bottom: 10%;
+  scale: 0;
+  transition: scale .3s ease;
+}
+.top-bar button:hover::after, .top-bar button:focus::after{
+  scale: 1;
+}
+.top-bar button.active::after{
+  scale: 1;
+}
+.top-bar button i{
+  font-size: 3em;
+  line-height: 0;
+}
+.main-section{
+  margin-top: 30px;
+}
+/* .main-section table, .main-section th, .main-section td{
+  border: 2px solid;
+} */
+
+.main-section table{
+  border-spacing: 20px; 
+}
+.main-section tr{
+  /* background: rgba(255,255,255,.5); */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 0 7px 3px rgba(0, 0, 0, 0.4);
+  border-radius: 999px;
+  text-align: center;
+}
+.main-section th{
+  font-size: 1.3em;
+}
+.main-section th, .main-section td{
+  padding: 10px 30px;
+}
+
+
 @media screen and (max-width: 1000px){
   body{
     overflow-y: auto;
   }
-  header{
-    padding: 0 30px;
+  header:not(#user){
+    padding: 30px 30px;
+    height: fit-content;
+    gap: 20px;
+    flex-direction: column;
+  }
+  header span{
+    flex-direction: column;
   }
   main{
     height: 100%;

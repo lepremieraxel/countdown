@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- LINK -->
-    <link rel="stylesheet" href="src/css/style.css" />
+    <link rel="stylesheet" href="./src/css/style.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
       rel="stylesheet"
@@ -19,25 +19,28 @@
     />
 
     <!-- TITLE -->
-    <title>Axel Marcial's Countdown</title>
+    <title>TIME</title>
   </head>
-  <body>
+  <body id="main">
     <header>
-      <h1>TIME</h1>
-      <button id="connect" onclick="openModal()">
-        <i class="ri-user-3-fill"></i>
-      </button>
+      <a href="/"><h1>TIME</h1></a>
+      <span>
+        <a href="./pages/user.html"></a>
+        <button id="connect" onclick="openModal()">
+          <i class="ri-user-3-fill"></i>
+        </button>
+      </span>
     </header>
     <main>
       <div class="date-box">
-        <p>Il reste</p>
+        <p>There are</p>
         <h2 id="date">
           <span id="days" class="input-countdown"></span><span id="days-name"></span>
           <span id="hours" class="input-countdown"></span><span id="hours-name"></span>
           <span id="minutes" class="input-countdown"></span><span id="minutes-name"></span>
           <span id="secondes" class="input-countdown"></span><span id="secondes-name"></span>
         </h2>
-        <p>avant</p>
+        <p>left before</p>
         <h2 id="why">la nouvelle coloc !!!</h2>
       </div>
     </main>
@@ -83,9 +86,9 @@
       </span>
     </div>
     <script src="./src/js/isConnected.js"></script>
+    <script src="./src/js/textContrast.js"></script>
     <script src="./src/js/sha256-min.js"></script>
     <script src="./src/js/countdown.js"></script>
-    <script src="./src/js/textContrast.js"></script>
     <script src="./src/js/form.js"></script>
     <script src="./src/js/modalManager.js"></script>
   </body>
