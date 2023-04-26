@@ -1,0 +1,22 @@
+[
+  {
+    "date": "May 13, 2023 09:00",
+    "reason": "La nouvelle coloc !!!",
+    "active": true
+  },
+  {
+    "date": "May 18, 2023 09:00",
+    "reason": "La nouvelle coloc 2 !!!",
+    "active": false
+  },
+  {
+    "date": "May 23, 2023 09:00",
+    "reason": "La nouvelle coloc 3 !!!",
+    "active": false
+  },
+  {
+    "date": "May 3, 2023 09:00",
+    "reason": "La nouvelle coloc 4 !!!",
+    "active": false
+  }
+]

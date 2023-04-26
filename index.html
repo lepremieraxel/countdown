@@ -6,90 +6,64 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- LINK -->
-    <link rel="stylesheet" href="./src/css/style.css" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="/src/css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
     <!-- TITLE -->
     <title>TIME</title>
   </head>
-  <body id="main">
+  <body>
     <header>
       <a href="/"><h1>TIME</h1></a>
-      <span>
-        <a href="./pages/user.html"></a>
-        <button id="connect" onclick="openModal()">
-          <i class="ri-user-3-fill"></i>
-        </button>
-      </span>
+      <button onclick="changeColor()" class="hoverEffect"><i class="ri-paint-brush-fill"></i></button>
     </header>
-    <main>
-      <div class="date-box">
+    <main id="main-countdown">
+      <div class="date-container">
         <p>There are</p>
         <h2 id="date">
-          <span id="days" class="input-countdown"></span><span id="days-name"></span>
-          <span id="hours" class="input-countdown"></span><span id="hours-name"></span>
-          <span id="minutes" class="input-countdown"></span><span id="minutes-name"></span>
-          <span id="secondes" class="input-countdown"></span><span id="secondes-name"></span>
+          <span id="days"></span><span id="days-name" class="date-name"></span>
+          <span id="hours"></span><span id="hours-name" class="date-name"></span>
+          <span id="minutes"></span><span id="minutes-name" class="date-name"></span>
+          <span id="secondes"></span><span id="secondes-name" class="date-name"></span>
         </h2>
         <p>left before</p>
-        <h2 id="why">la nouvelle coloc !!!</h2>
+        <h2 id="reason"></h2>
       </div>
     </main>
-    <div class="modal-overlay"></div>
-    <div class="modal">
-      <button class="close-modal" onclick="closeModal()">
-        <i class="ri-close-fill"></i>
-      </button>
-      <span class="modal-title">
-        <h3>Hi, Welcome Back!</h3>
-        <p>Please log in to access edit mode.</p>
-      </span>
-      <form name="loginForm">
-        <span class="input-container">
-          <input
-            type="text"
-            name="usernameOrEmail"
-            id="usernameOrEmail"
-            placeholder=" "
-            autocomplete="off"
-            data-isvalid="false"
-          />
-          <label for="usernameOrEmail">Username or email *</label>
-          <small></small>
-        </span>
-        <span class="input-container">
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder=" "
-            autocomplete="off"
-            data-isvalid="false"
-          />
-          <label for="password">Password</label>
-          <small></small>
-        </span>
-        <button name="submit">Log In</button>
-      </form>
-      <span class="others-actions">
-        <button onclick="forgotForm()">Forgot password</button>
-        <button onclick="signinForm()">Haven't an account</button>
-      </span>
+    <div class="delModal">
+      <h2>Are you sure  to delete this countdown ?</h2>
+      <table id="list">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Date</th>
+            <th>Reason</th>
+            <th>Active</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>May 13, 2023 09:00</td>
+            <td>My birthday !</td>
+            <td>N</td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <button class="closeBtn">Close</button>
+        <form action="" method="post">
+          <input type="hidden" name="countdown-id">
+          <button class="delBtn">Delete</button>
+        </form>
+      </div>
     </div>
-    <script src="./src/js/isConnected.js"></script>
-    <script src="./src/js/textContrast.js"></script>
-    <script src="./src/js/sha256-min.js"></script>
-    <script src="./src/js/countdown.js"></script>
-    <script src="./src/js/form.js"></script>
-    <script src="./src/js/modalManager.js"></script>
+    <script src="/src/js/colorSwapper.js"></script>
+    <script src="/src/js/countdown.js"></script>
   </body>
 </html>

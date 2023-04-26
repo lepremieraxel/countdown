@@ -1,6 +1,5 @@
-const jourJ = new Date("May 14, 2023");
-const why = "La nouvelle coloc !!!";
-const bg = "./assets/img/bg7.jpg";
+const jourJ = new Date("May 13, 2023 09:00");
+const reason = "La nouvelle coloc !!!";
 
 const daysSpan = document.querySelector('#days');
 const hoursSpan = document.querySelector('#hours');
@@ -12,15 +11,11 @@ const hoursName = document.querySelector('#hours-name');
 const minutesName = document.querySelector('#minutes-name');
 const secondesName = document.querySelector('#secondes-name');
 
-const whySpan = document.querySelector('#why');
+const reasonSpan = document.querySelector('#reason');
 
 function countdown(){
-  // console.log(localStorage);
-  isConnected();
   
-  whySpan.innerHTML = why;
-  body.style.backgroundImage = 'url('+bg+')';
-  textColor(bg);
+  reasonSpan.innerHTML = reason;
 
   const today = new Date();
 
