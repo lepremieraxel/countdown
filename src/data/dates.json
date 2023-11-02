@@ -1,8 +1,13 @@
 [
   {
+    "date": "Mar 18, 2024 00:00",
+    "reason": "Stage",
+    "active": true
+  },
+  {
     "date": "May 13, 2023 09:00",
     "reason": "La nouvelle coloc !!!",
-    "active": true
+    "active": false
   },
   {
     "date": "May 18, 2023 09:00",
